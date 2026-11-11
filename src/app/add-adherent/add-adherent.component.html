@@ -1,0 +1,38 @@
+<div class="container">
+    <div>
+        <h2>Ajouter un Adhérent :</h2>
+    </div>
+    <form>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>ID Adhérent</label>
+            <input type="number" [(ngModel)]="newAdherent.idAdherent" name="idAdherent" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Nom</label>
+            <input type="text" [(ngModel)]="newAdherent.nom" name="nom" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Prénom</label>
+            <input type="text" [(ngModel)]="newAdherent.prenom" name="prenom" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Type d'abonnement</label>
+            <select [(ngModel)]="newIdType" name="idType" class="form-control">
+                @for (t of types; track t.idType) {
+                <option [ngValue]="t.idType">{{t.nomType}}</option>
+                }
+            </select>
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Prix Abonnement</label>
+            <input type="number" [(ngModel)]="newAdherent.prixAbonnement" name="prixAbonnement" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Date inscription</label>
+            <input type="date" [(ngModel)]="newAdherent.dateInscription" name="dateInscription" class="form-control">
+        </div>
+        <div class="mt-2">
+            <button type="submit" (click)="addAdherent()" class="btn btn-success">Ajouter</button>
+        </div>
+    </form>
+</div>

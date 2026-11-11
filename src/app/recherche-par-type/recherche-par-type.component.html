@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
+        <label>Types d'abonnement</label>
+        <select class="form-control form-control-lg" id="idType" name="idType" [(ngModel)]="IdType"
+            (change)="onChange()">
+            @for (t of types; track t.idType) {
+            <option value="{{t.idType}}"> {{t.nomType}} </option>
+            }
+        </select>
+    </div>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-striped">
+                <tr>
+                    <th>Id</th><th>Nom</th><th>Prénom</th><th>Abonnement</th><th>Prix</th><th>Date inscription</th>
+                </tr>
+                @for (adherent of adherents; track adherent.idAdherent) {
+                <tbody>
+                    <tr>
+                        <td>{{adherent.idAdherent}}</td>
+                        <td>{{adherent.nom}}</td>
+                        <td>{{adherent.prenom}}</td>
+                        @if (adherent.typeAbonnement) {
+                        <td>{{adherent.typeAbonnement.nomType}}</td>
+                        } @else {
+                        <td>PAS DE TYPE</td>
+                        }
+                        <td>{{adherent.prixAbonnement}} DT</td>
+                        <td>{{adherent.dateInscription | date:'dd/MM/yyyy'}}</td>
+                        <!--
+                        <td><a class="btn btn-danger" (click)="supprimerAdherent(adherent)">Supprimer</a></td>
+                        <td><a class="btn btn-success" [routerLink]="['/update-adherent',adherent.idAdherent]">Modifier</a></td> -->
+                    </tr>
+                </tbody>
+                }
+            </table>
+        </div>
+    </div>
+</div>

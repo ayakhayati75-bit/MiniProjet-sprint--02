@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>N°</th><th>Id</th><th>Nom</th><th>Prénom</th>
+            <th>Abonnement</th><th>Prix</th><th>Date inscription</th>
+            @if (authService.isAdmin()) {
+            <th colspan="2">Actions</th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (adherent of adherents; track adherent.idAdherent; let i = $index; let nb = $count; let isFirst = $first; let isLast = $last) {
+            <tr [class.table-success]="isFirst" [class.table-danger]="isLast">
+              <td>{{ i + 1 }}</td>
+              <td>{{ adherent.idAdherent }}</td>
+              <td>{{ adherent.nom }}</td>
+              <td>{{ adherent.prenom }}</td>
+              <td>{{ adherent.typeAbonnement.nomType }}</td>
+              <td>{{ adherent.prixAbonnement }} DT</td>
+              <td>{{ adherent.dateInscription | date:'dd/MM/yyyy' }}</td>
+              @if (authService.isAdmin()) {
+              <td>
+                <a class="btn btn-danger btn-sm" (click)="supprimerAdherent(adherent)">Supprimer</a>
+              </td>
+              <td>
+                <a class="btn btn-success btn-sm"
+                   [routerLink]="['/update-adherent', adherent.idAdherent]">Modifier</a>
+              </td>
+              }
+            </tr>
+            @if (isLast) {
+              <tr>
+                <td colspan="9" class="fw-bold">Nombre d'adhérents : {{ nb }}</td>
+              </tr>
+            }
+          } @empty {
+            <tr>
+              <td colspan="9" class="text-center">Aucun adhérent disponible</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
